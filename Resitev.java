@@ -10,7 +10,13 @@ public class Resitev{
 
     int numberOfPhotos = Integer.parseInt(br.readLine());
     
-    Slika[] slike = new Slika[numberOfPhotos];
+    //Slika[] slikeH = new Slika[numberOfPhotos];
+    Slike[] slikeV = new Slike[numberOfPhotos];
+    //int stevecH = 0;
+    int stevecV = 0;
+	
+	ArrayList<Slide> slide = new ArrayList<Slide>();
+	int stevecS = 0;
 
     for(int i = 0; i < slike.length; i++){
       String[] data = br.readLine().split(" ");
@@ -25,7 +31,15 @@ public class Resitev{
       }
 
       Slika novaSlika = new Slika(i, usmerjenost, set);
-      slike[i] = novaSlika;
+      if(usmerjenost == 'H'){
+		Slide novSlide = new Slide(i, novaSlika); 
+        slide.add(novSlide);
+        stevecS++; 
+      }else{
+		Slika novaSlika = new Slika(i, usmerjenost, set);
+        slikeV[stevecV] = novaSlika;
+        stevecV++;
+      }
     }
 
     Slide one = new Slide(0, slike[0]);
