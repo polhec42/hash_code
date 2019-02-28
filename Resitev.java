@@ -31,9 +31,29 @@ public class Resitev{
     Slide one = new Slide(0, slike[0]);
     Slide two = new Slide(1, slike[3]);
 
-    System.out.println(one.Scoring(two));
+    Arrays.sort(slike, new Comparator<Slika>(){
+      @Override  
+      public int compare(Slika s1, Slika s2){
+          if(s1.tags.size() < s2.tags.size()){
+            return 1; 
+          }
+          if(s1.tags.size() > s2.tags.size()){
+            return -1;
+          }
+          return 0;
+        }
+    });
+
+    //print(slike);
 
   }
+
+  private static void print(Slika[] slike){
+    for(int i = 0; i < slike.length; i++){
+      System.out.println(slike[i].ID);
+    }
+  }
+
   private static class Slideshow{
 
       public ArrayList<Slide> slides;
