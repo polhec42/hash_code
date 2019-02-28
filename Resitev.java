@@ -1,4 +1,6 @@
 import java.util.*;
+
+
 import java.io.*;
 
 
@@ -6,7 +8,9 @@ public class Resitev{
   
   public static void main(String[] args) throws IOException{
 
-    BufferedReader br = new BufferedReader(new FileReader(args[0]));
+		String file = args[0];
+
+    BufferedReader br = new BufferedReader(new FileReader(file));
 
     int numberOfPhotos = Integer.parseInt(br.readLine());
     
@@ -77,8 +81,44 @@ public class Resitev{
 			System.out.println(s.ID1 + " " + s.tags.size());
 		}*/
 
-		
+		ArrayList<Slide> slideShow = new ArrayList<>();
+		slideShow.add(slide.get(0));
+		slide.remove(slide.get(0));
+		for(int i = 0; slide.size() != 0; i++){
+			int index = chooseBest(slideShow, slide, i);
+			slideShow.add(slide.get(index));
+			slide.remove(slide.get(index));
+		}
 
+		
+		String newFile = file.substring(0, file.length()-4).concat("_solution.txt");
+		BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(newFile));
+		bufferedWriter.write(Integer.toString(slideShow.size()) + "\r\n");
+		for(Slide s : slideShow){
+			if(s.numOfPics == 1){
+				bufferedWriter.write(Integer.toString(s.ID1) + "\r\n");
+			}else{
+				bufferedWriter.write(Integer.toString(s.ID1) + " " +  Integer.toString(s.ID2) + "\r\n");
+			}
+		}
+		bufferedWriter.close();
+
+	}
+
+	private static int chooseBest(ArrayList<Slide> slideShow, ArrayList<Slide> slide, int index){
+		Slide last = slideShow.get(index);
+		int maxScore = 0;
+		int maxI = 0;
+		int stevec = index+1;
+		while(stevec < slide.size() && maxScore <= Math.min(slide.get(stevec).tags.size(), slide.get(maxI).tags.size())/2){
+			int score = last.Scoring(slide.get(stevec));
+			if(score > maxScore){
+				maxScore = score;
+				maxI = stevec;
+			} 
+			stevec++;
+		}
+		return maxI;
 	}
 
   private static void print(Slika[] slike){
