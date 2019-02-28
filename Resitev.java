@@ -28,10 +28,10 @@ public class Resitev{
       slike[i] = novaSlika;
     }
 
-    Slide one = new Slide(0, slika[0]);
-    Slide two = new Slide(1, slika[1]);
+    Slide one = new Slide(0, slike[0]);
+    Slide two = new Slide(1, slike[3]);
 
-    System.out.println();
+    System.out.println(one.Scoring(two));
 
   }
   private static class Slideshow{
@@ -82,9 +82,28 @@ public class Resitev{
 			tags.addAll(s1.tags);
 			tags.addAll(s2.tags);
 		}
-  
-
-	} 
+		
+		public int Scoring(Slide s){
+			HashSet<String> t = new HashSet<String>();
+			t.addAll(this.tags);
+			t.retainAll(s.tags);
+			int presek = t.size();
+			
+			t = new HashSet<String>();
+			t.addAll(this.tags);
+			t.removeAll(s.tags);
+			int razlika1 = t.size();
+      
+      t = new HashSet<String>();
+			t.addAll(s.tags);
+			t.removeAll(this.tags);
+			int razlika2 = t.size();
+			
+			return Math.min(Math.min(presek, razlika1), razlika2);
+			
+		}
+		
+	}
 	
 	
 }
