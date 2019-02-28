@@ -65,6 +65,26 @@ public class Resitev{
 			tags.addAll(s2.tags);
 		}
 		
+		public int Scoring(Slide s){
+			HashSet<String> t = new HashSet<String>;
+			t.addAll(this.tags);
+			t.retainAll(s.tags);
+			int presek = t.size();
+			
+			HashSet<String> t = new HashSet<String>;
+			t.addAll(this.tags);
+			t.removeAll(s.tags);
+			int razlika1 = t.size();
+			
+			HashSet<String> t = new HashSet<String>;
+			t.addAll(s.tags);
+			t.ramoveAll(this.tags);
+			int razlika2 = t.size();
+			
+			return Math.min(Math.min(presek, razlika1), razlika2);
+			
+		}
+		
 	}
 	
 	
