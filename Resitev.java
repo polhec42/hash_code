@@ -16,7 +16,9 @@ public class Resitev{
       String[] data = br.readLine().split(" ");
       char usmerjenost = data[0].toCharArray()[0];
       int numberOfTags = Integer.parseInt(data[1]);
-      
+      if(numberOfTags < 2){
+        continue;
+      }
       HashSet<String> set = new HashSet<>();
       for(int j = 2; j < data.length; j++){
         set.add(data[j]);
@@ -25,6 +27,22 @@ public class Resitev{
       Slika novaSlika = new Slika(i, usmerjenost, set);
       slike[i] = novaSlika;
     }
+
+    Slide one = new Slide(0, slika[0]);
+    Slide two = new Slide(1, slika[1]);
+
+    System.out.println();
+
+  }
+  private static class Slideshow{
+
+      public ArrayList<Slide> slides;
+
+      public void print(){
+        for(int i = 0; i < slides.size(); i++){
+          System.out.println(slides.get(i).tags.toString());
+        }
+      }
 
   }
 
@@ -60,12 +78,13 @@ public class Resitev{
 			this.ID1 = ID1;
 			this.ID2 = ID2;
 			this.numOfPics = 2;
-			this.tags = new HashSet<String>;
+			this.tags = new HashSet<String>();
 			tags.addAll(s1.tags);
 			tags.addAll(s2.tags);
 		}
-		
-	}
+  
+
+	} 
 	
 	
 }
