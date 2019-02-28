@@ -11,12 +11,12 @@ public class Resitev{
     BufferedReader br = new BufferedReader(new FileReader(args[0]));
 
     int numberOfPhotos = Integer.parseInt(br.readLine());
-
-    Slika slike = new Slika[numberOfPhotos];
+    
+    Slika[] slike = new Slika[numberOfPhotos];
 
     for(int i = 0; i < slike.length; i++){
       String[] data = br.readLine().split(" ");
-      char usmerjenost = (char)Integer.parseInt(data[0]);
+      char usmerjenost = data[0].toCharArray()[0];
       int numberOfTags = Integer.parseInt(data[1]);
       
       HashSet<String> set = new HashSet<>();
@@ -25,7 +25,7 @@ public class Resitev{
       }
 
       Slika novaSlika = new Slika(i, usmerjenost, set);
-    
+      slike[i] = novaSlika;
     }
 
   }
@@ -37,7 +37,7 @@ public class Resitev{
 		public int ID;
 		
 		public Slika(int ID, char orientation, HashSet<String> tags){
-				this.orientation = orientation;
+				this.ori = orientation;
 				this.ID = ID;
 				this.tags = tags;
 		}
