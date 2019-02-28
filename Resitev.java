@@ -11,14 +11,14 @@ public class Resitev{
     int numberOfPhotos = Integer.parseInt(br.readLine());
     
     //Slika[] slikeH = new Slika[numberOfPhotos];
-    Slike[] slikeV = new Slike[numberOfPhotos];
+    Slika[] slikeV = new Slika[numberOfPhotos];
     //int stevecH = 0;
     int stevecV = 0;
 	
 	ArrayList<Slide> slide = new ArrayList<Slide>();
 	int stevecS = 0;
 
-    for(int i = 0; i < slike.length; i++){
+    for(int i = 0; i < numberOfPhotos; i++){
       String[] data = br.readLine().split(" ");
       char usmerjenost = data[0].toCharArray()[0];
       int numberOfTags = Integer.parseInt(data[1]);
@@ -36,16 +36,13 @@ public class Resitev{
         slide.add(novSlide);
         stevecS++; 
       }else{
-		Slika novaSlika = new Slika(i, usmerjenost, set);
+		 novaSlika = new Slika(i, usmerjenost, set);
         slikeV[stevecV] = novaSlika;
         stevecV++;
       }
     }
-
-    Slide one = new Slide(0, slike[0]);
-    Slide two = new Slide(1, slike[3]);
-
-    Arrays.sort(slike, new Comparator<Slika>(){
+		
+    Arrays.sort(slikeV, new Comparator<Slika>(){
       @Override  
       public int compare(Slika s1, Slika s2){
           if(s1.tags.size() < s2.tags.size()){
@@ -57,6 +54,11 @@ public class Resitev{
           return 0;
         }
     });
+
+		for(int i = 0; i < slikeV.length; i++){
+			Slide s = new Slide(slikeV[i].ID, slikeV[slikeV.length - 1 - i].ID, slikeV[i], slikeV[slikeV.length - 1 - i]);
+			slide.add(s);
+		}
 
     //print(slike);
 
