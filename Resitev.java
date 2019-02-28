@@ -10,11 +10,8 @@ public class Resitev{
 
     int numberOfPhotos = Integer.parseInt(br.readLine());
     
-    Slika[] slikeH = new Slika[numberOfPhotos];
-    Slike[] slikeV = new Slike[numberOfPhotos];
-    int stevecH = 0;
-    int stevecV = 0;
-    
+    Slika[] slike = new Slika[numberOfPhotos];
+
     for(int i = 0; i < slike.length; i++){
       String[] data = br.readLine().split(" ");
       char usmerjenost = data[0].toCharArray()[0];
@@ -28,13 +25,7 @@ public class Resitev{
       }
 
       Slika novaSlika = new Slika(i, usmerjenost, set);
-      if(usmerjenost == 'H'){
-        slikeH[stevecH] = novaSlika;
-        stevecH++; 
-      }else{
-        slikeV[stevecV] = novaSlika;
-        stevecV++;
-      }
+      slike[i] = novaSlika;
     }
 
     Slide one = new Slide(0, slike[0]);
@@ -87,7 +78,12 @@ public class Resitev{
 				this.tags = tags;
 		}
 		
-		
+		public int mocUnije(Slika s){
+			HashSet<String> t = new HashSet<String>();
+			tags.addAll(s.tags);
+			tags.addAll(this.tags);
+			return t.size();
+		}
 		
 	}
 	
@@ -136,4 +132,3 @@ public class Resitev{
 	
 	
 }
-
