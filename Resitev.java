@@ -110,7 +110,7 @@ public class Resitev{
 		int maxScore = 0;
 		int maxI = 0;
 		int stevec = index+1;
-		while(stevec < slide.size() && maxScore <= Math.min(slide.get(stevec).tags.size(), slide.get(maxI).tags.size())/2){
+		while(stevec < index + 100 && stevec < slide.size() && maxScore <= Math.min(slide.get(stevec).tags.size(), slide.get(maxI).tags.size())/2){
 			int score = last.Scoring(slide.get(stevec));
 			if(score > maxScore){
 				maxScore = score;
